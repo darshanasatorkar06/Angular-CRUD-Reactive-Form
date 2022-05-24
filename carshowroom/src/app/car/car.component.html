@@ -1,0 +1,106 @@
+<h2 style="color: black;text-align: center; background-color: white; padding: 7px;">Cars Info Page</h2>
+<div class="bg-img">
+<div class="row">
+  <div class="col-lg-4 col-md-6 col-12">
+    <form action="/action_page.php" class="container">
+      <h2>Fill Info</h2>
+  <form [formGroup]="CarForm" >
+    <div class="form-group">
+        <label>Select Car:</label>
+          <select class="form-control" id="sel1" name="sellist1" formControlName="carname"
+          [ngClass]="{'is-invalid': submitted && f['carname'].errors}">
+            <option>Select</option>
+            <option>Maruti Swift</option>
+            <option>Tata Punch</option>
+            <option>Toyota Fortuner</option>
+            <option>Mahindra Scorpio</option>
+            <option>Hyundai Creta</option>
+          </select>
+          <div *ngIf="submitted && f['carname'].errors" class="invalid-feedback">
+
+            <div *ngIf="f['carname'].errors['required']">
+              Car Name is required!
+            </div>
+           </div>
+        </div>
+     <div class="form-group">
+       <label>Model</label>
+     <input type="text" class="form-control" placeholder="Enter Model" formControlName="module"
+     [ngClass]="{'is-invalid': submitted && f['module'].errors}">
+
+     <div *ngIf="submitted && f['module'].errors" class="invalid-feedback">
+
+        <div *ngIf="f['module'].errors['required']">
+          Mobile Number is required!
+        </div>
+        
+         <div *ngIf="f['module'].errors['minlength']">
+          Please enter minimum 5 characters...!
+        </div>
+
+        <div *ngIf="f['module'].errors['maxlength']">
+          Please enter maximum 12 characters...!
+        </div>
+
+      </div>
+
+       </div>
+       <div class="form-group">
+        <label>Mileage</label>
+      <input type="text" class="form-control" placeholder="Enter Mileage" formControlName="mileage"
+      [ngClass]="{'is-invalid': submitted && f['mileage'].errors}">
+      <div *ngIf="submitted && f['mileage'].errors" class="invalid-feedback">
+
+        <div *ngIf="f['mileage'].errors['required']">
+         Mileage is required!
+        </div>
+        
+         <div *ngIf="f['mileage'].errors['minlength']">
+          Please enter minimum 1 characters...!
+        </div>
+
+        <div *ngIf="f['mileage'].errors['maxlength']">
+          Please enter maximum 2 characters...!
+        </div>
+
+      </div>
+        </div>
+       <button type="submit" *ngIf="editoperation==false" class="btn btn-info" style="border: 5px solid rgb(230, 242, 253);" (click)="submitinfo()">Submit</button>
+       <button type="button" *ngIf="editoperation==true" class="btn btn-warning" style="border: 5px solid rgb(214, 232, 240);"(click)="Updatecar()">Update</button>
+</form>
+  </form>
+  </div>
+  <div class="col-lg-8 col-md-6 col-12">
+    <div class="row" style="padding-top: 60px; margin-right: 20px;">
+      <div class="col-lg-12 col-md-12 col-12" style="padding-bottom: 1rem;">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" [(ngModel)]="carterm">
+        
+      </div>
+      <div class="col-lg-12 col-md-12 col-12 table-responsive" style="height: 300px;">
+        <table class="table " style="background-color:white">
+          <thead>
+            <tr>
+              <th>Car Name</th>
+              <th>Model</th>
+              <th>Mileage</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let info of carList | filter : carterm;let Cluster=index">
+              <td>{{info.carname}}</td>
+              <td>{{info.module}}</td>
+              <td>{{info.mileage}}</td>
+              <td>
+                <button type="button" class="btn btn-info"  style="margin-right: 5px;" (click)="edit(Cluster,info)"><i class="fa fa-edit"></i>Edit</button>
+                <button type="button" class="btn btn-dark"  (click)="trash(Cluster)"><i class="fa fa-trash"></i>Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+   
+  </div>
+</div>
+</div>

@@ -1,0 +1,40 @@
+
+<body>
+  <div class="container-fluid" >
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark ">
+      <!-- Brand/logo -->
+      <a class="navbar-brand" href="#">
+        <i class="fas fa-car"></i>
+      </a>
+      
+      <!-- Links -->
+      <ul class="navbar-nav ">
+        <li class="nav-item ">
+          <a class="nav-link" [routerLink]="['/login']" style="color: white;">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/register']" style="color: white;">Register</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/car']" style="color: white;">Car</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/parts']" style="color: white;">Parts</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/staff']" style="color: white;">Staff</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/bill']" style="color: white;">Bill</a>
+        </li>
+      </ul>
+      </nav>
+    <h1 style="color: white; font-size: 30px;text-align: center; background-color: #15b0e8a0; padding: 10px;">CAR SHOWROOM MANAGEMENT SYSTEM</h1>
+    
+       
+    
+    <router-outlet></router-outlet>
+  
+ </div>
+</body>
+

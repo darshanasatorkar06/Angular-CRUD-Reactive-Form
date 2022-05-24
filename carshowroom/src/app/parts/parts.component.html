@@ -1,0 +1,101 @@
+<h2 style="color: black;text-align: center; background-color: white; padding: 7px;">Cars Part Page</h2>
+<div class="bg-img">
+<div class="row">
+  <div class="col-lg-4 col-md-6 col-12">
+    <form action="/action_page.php" class="container">
+      <h2>Fill Info</h2>
+   <form [formGroup]="partsForm">
+    <div class="form-group">
+      <label>Part Name:</label>
+   <input type="text" class="form-control" placeholder="Enter Part Name" formControlName="partname"
+   [ngClass]="{'is-invalid': submitted && f['partname'].errors}">
+
+   <div *ngIf="submitted && f['partname'].errors" class="invalid-feedback">
+
+    <div *ngIf="f['partname'].errors['required']">
+     Part Name is required!
+    </div>
+
+     <div *ngIf="f['partname'].errors['minlength']">
+      Please enter minimum 5 characters...!
+    </div>
+
+    <div *ngIf="f['partname'].errors['maxlength']">
+      Please enter maximum 10 characters...!
+    </div>
+    
+   </div>
+      </div>
+   <div class="form-group">
+     <label>Manufacturing Date</label>
+   <input type="date" class="form-control" placeholder="Enter Manufacturing Date" formControlName="manufacturedate"
+   [ngClass]="{'is-invalid': submitted && f['MRP'].errors}">
+   <div *ngIf="submitted && f['MRP'].errors" class="invalid-feedback">
+
+    <div *ngIf="f['MRP'].errors['required']">
+      Manufacturing Date is required!
+    </div>
+
+    </div
+    >
+     </div>
+     <div class="form-group">
+      <label>Price</label>
+    <input type="text" class="form-control" placeholder="Enter MRP Price" formControlName="MRP"
+    [ngClass]="{'is-invalid': submitted && f['MRP'].errors}">
+
+    <div *ngIf="submitted && f['MRP'].errors" class="invalid-feedback">
+
+      <div *ngIf="f['MRP'].errors['required']">
+        Price is required!
+      </div>
+
+       <div *ngIf="f['MRP'].errors['minlength']">
+        Please enter minimum 4 characters...!
+      </div>
+
+      <div *ngIf="f['MRP'].errors['maxlength']">
+        Please enter maximum 7 characters...!
+      </div>
+      
+     </div>
+      </div>
+     <button type="submit" *ngIf="editoperation==false" class="btn btn-info"style="border: 5px solid aliceblue;" (click)="submitpart()">Submit</button>
+     <button type="button" *ngIf="editoperation==true" class="btn btn-warning" style="border: 5px solid rgb(214, 232, 240);"(click)="Updatepart()">Update</button>
+
+   </form>
+    </form>
+  </div>
+  <div class="col-lg-8 col-md-6 col-12">
+    <div class="row" style="padding-top: 60px; margin-right: 20px;">
+      <div class="col-lg-12 col-md-12 col-12" style="padding-bottom: 1rem;">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" [(ngModel)]="partterm">
+        
+      </div>
+      <div class="col-lg-12 col-md-12 col-12 table-responsive" style="height: 300px;">
+        <table class="table" style="background-color:white">
+          <thead>
+            <tr>
+              <th>Part Name</th>
+              <th>Manufacturing Date</th>
+              <th>Price</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let partinfo of partList | filter : partterm;let now=index">
+              <td>{{partinfo.partname}}</td>
+              <td>{{partinfo.manufacturedate}}</td>
+              <td>{{partinfo.MRP}}</td>
+              <td>
+                <button type="button" class="btn btn-info" style="margin-right: 5px;" (click)="partedit(now,partinfo)"><i class="fa fa-edit"></i>Edit</button>
+                <button type="button" class="btn btn-dark " (click)="parttrash(now)"><i class="fa fa-trash"></i>Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>

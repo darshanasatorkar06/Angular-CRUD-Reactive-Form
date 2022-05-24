@@ -1,0 +1,91 @@
+<h2 style="color: black;text-align: center; background-color: white; padding: 7px;">Staff Page</h2>
+<div class="bg-img">
+<div class="row">
+  <div class="col-lg-4 col-md-6 col-12">
+    <form action="/action_page.php" class="container">
+      <h2>Fill Info</h2>
+  <form [formGroup]="staffForm">
+    <div class="form-group">
+        <label>Staff Name:</label>
+        <input type="text" class="form-control" placeholder="Enter Staff Name" formControlName="staffname"
+        [ngClass]="{'is-invalid': submitted && f['staffname'].errors}">
+        <div *ngIf="submitted && f['staffname'].errors" class="invalid-feedback">
+
+          <div *ngIf="f['staffname'].errors['required']">
+            Staff Name is required!
+          </div>
+    
+          <div *ngIf="submitted && f['staffname'].errors['minlength']" >
+            Please Enter maximum 6 characters
+          </div>
+
+          <div *ngIf="submitted && f['staffname'].errors['maxlength']">
+          Please Enter maximum 15 characters
+          </div>
+          
+         </div>
+      </div>
+     <div class="form-group">
+      <label for="sel1" >Select Gender:</label>
+      <select class="form-control"formControlName="gender"
+      [ngClass]="{'is-invalid': submitted && f['gender'].errors}">
+     
+        <option>Male</option>
+        <option>Female</option>
+        <option>Other</option>
+      </select>
+      <div *ngIf="submitted && f['staffname'].errors" class="invalid-feedback">
+          Gender is required!
+      </div>
+     </div>
+     <div class="form-group">
+      <label>Salary:</label>
+      <input type="text" class="form-control" placeholder="Enter Salary" formControlName="salary"
+      [ngClass]="{'is-invalid': submitted && f['salary'].errors}">
+      <div *ngIf="submitted && f['salary'].errors" class="invalid-feedback">
+
+        <div *ngIf="f['salary'].errors['required']">
+          Salary is required!
+        </div>
+        
+       </div>
+    </div>
+     <button type="submit" *ngIf="editoperation==false" class="btn btn-info" style="border: 5px solid aliceblue;" (click)="staffsubmit()">Submit</button>
+     <button type="button" *ngIf="editoperation==true" class="btn btn-warning" style="border: 5px solid rgb(214, 232, 240);"(click)="Updatestaff()">Update</button>
+
+  </form>
+  </form>
+  </div>
+  <div class="col-lg-8 col-md-6 col-12">
+    <div class="row"  style="padding-top: 60px; margin-right: 20px;">
+      <div class="col-lg-12 col-md-12 col-12" style="padding-bottom: 1rem;">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" [(ngModel)]="staffterm">
+        
+      </div>
+      <div class="col-lg-12 col-md-12 col-12 table-responsive" style="height: 300px;">
+        <table class="table" style="background-color:white">
+          <thead>
+            <tr>
+              <th>StaffName</th>
+              <th>Gender</th>
+              <th>Salary</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let staffinfo of staffList | filter : staffterm;let staffdetail=index">
+              <td>{{staffinfo.staffname}}</td>
+              <td>{{staffinfo.gender}}</td>
+              <td>{{staffinfo.salary}}</td>
+              <td>
+                <button type="button" class="btn btn-info" style="margin-right: 5px;" (click)="staffedit(staffdetail,staffinfo)"><i class="fa fa-edit"></i>Edit</button>
+                <button type="button" class="btn btn-dark"  (click)="stafftrash(staffinfo)"><i class="fa fa-trash"></i>Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
